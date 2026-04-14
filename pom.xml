@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.ddd.platform</groupId>
+  <artifactId>ddd-platform</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.1.5</version>
+    <relativePath/>
+  </parent>
+
+  <modules>
+    <module>ddd-common</module>
+    <module>ddd-domain</module>
+    <module>ddd-infrastructure</module>
+    <module>ddd-application</module>
+    <module>ddd-interfaces</module>
+    <module>ddd-bootstrap</module>
+  </modules>
+
+  <properties>
+    <java.version>17</java.version>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+    <mybatis-plus.version>3.5.5</mybatis-plus.version>
+    <jjwt.version>0.12.3</jjwt.version>
+    <swagger.version>2.2.0</swagger.version>
+    <lombok.version>1.18.30</lombok.version>
+    <slf4j.version>2.0.9</slf4j.version>
+    <junit.version>5.9.3</junit.version>
+    <druid.version>1.2.23</druid.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- 内部模块 -->
+      <dependency>
+        <groupId>com.ddd.platform</groupId>
+        <artifactId>ddd-common</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.ddd.platform</groupId>
+        <artifactId>ddd-domain</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.ddd.platform</groupId>
+        <artifactId>ddd-infrastructure</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.ddd.platform</groupId>
+        <artifactId>ddd-application</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.ddd.platform</groupId>
+        <artifactId>ddd-interfaces</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <!-- MyBatis Plus -->
+      <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+        <version>${mybatis-plus.version}</version>
+      </dependency>
+
+      <!-- JWT -->
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-api</artifactId>
+        <version>${jjwt.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-impl</artifactId>
+        <version>${jjwt.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-jackson</artifactId>
+        <version>${jjwt.version}</version>
+      </dependency>
+
+      <!-- Swagger -->
+      <dependency>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        <version>${swagger.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba.fastjson2</groupId>
+        <artifactId>fastjson2</artifactId>
+        <version>2.0.43</version>
+      </dependency>
+
+      <!-- JUnit 5 -->
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- Spring Boot Test -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <version>3.1.5</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid-spring-boot-3-starter</artifactId>
+        <version>${druid.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!-- Lombok 全局依赖 -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- SLF4J -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-amqp</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.1.2</version>
+          <configuration>
+            <includes>
+              <include>**/*Test.java</include>
+            </includes>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.10</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>report</id>
+              <phase>test</phase>
+              <goals>
+                <goal>report</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

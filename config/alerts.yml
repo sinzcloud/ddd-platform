@@ -1,0 +1,23 @@
+groups:
+  - name: ddd_platform_alerts
+    rules:
+      # 接口响应时间告警
+      - alert: HighResponseTime
+        expr: rate(http_server_requests_seconds_sum[1m]) / rate(http_server_requests_seconds_count[1m]) > 1
+        for: 2m
+        annotations:
+          summary: "接口响应时间过长"
+
+      # 登录失败告警
+      - alert: ManyLoginFailures
+        expr: rate(app_user_login_failure_total[5m]) > 10
+        for: 1m
+        annotations:
+          summary: "登录失败次数过多"
+
+      # 服务宕机告警
+      - alert: ServiceDown
+        expr: up == 0
+        for: 1m
+        annotations:
+          summary: "服务已停止"
